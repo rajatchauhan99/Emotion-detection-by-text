@@ -4,6 +4,7 @@ import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 import yaml
 import logging
+from dvclive import Live
 
 # logging configuration
 logger = logging.getLogger('feature_engineering')
@@ -56,6 +57,9 @@ def load_data(file_path: str) -> pd.DataFrame:
 def apply_tfidf(train_data: pd.DataFrame, test_data: pd.DataFrame, max_features: int) -> tuple:
     """Apply TfIdf to the data."""
     try:
+        with Live(save_dvc_exp = True) as live:
+            live.log_param("max_features", max_features)
+
         vectorizer = TfidfVectorizer(max_features=max_features)
 
         X_train = train_data['content'].values
