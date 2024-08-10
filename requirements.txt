@@ -3,3 +3,5 @@ pandas
 scikit-learn
 nltk
 dvc
+dvclive
+dvc_s3
